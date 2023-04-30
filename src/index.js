@@ -11,45 +11,52 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 function Square(props) {
   return (
-      <button className="square"
-       onClick={props.onClick()}>
-        {props.value}
-      </button>
-    );
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 class Board extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
-      xIsNext: true,
+      xIsNext: true
     };
   }
 
-  handleClick(i){
+  handleClick(i) {
     const squares = this.state.squares.slice();
-    squares[i] = this.state.xIsNext?'X':'0';
-    this.setState({squares: squares, xIsNext: !this.state.xIsNext,});
-    
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    squares[i] = this.state.xIsNext ? "X" : "O";
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext
+    });
   }
+
   renderSquare(i) {
     return (
-    <Square value = {this.state.squares[i]} 
-    onClick={() => this.handleClick(i)}
-    />
-  );
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    );
   }
 
   render() {
     const winner = calculateWinner(this.state.squares);
     let status;
-    if (winner) { 
-      status = 'Winner:' + winner;
+    if (winner) {
+      status = "Winner: " + winner;
     } else {
-      status = 'Next player:' + (this.state.xIsNext?'X':'0');
+      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
-return (
+
+    return (
       <div>
         <div className="status">{status}</div>
         <div className="board-row">
@@ -90,7 +97,7 @@ class Game extends React.Component {
 
 // ========================================
 
- const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Game />);
 
 function calculateWinner(squares) {
@@ -102,7 +109,7 @@ function calculateWinner(squares) {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6],
+    [2, 4, 6]
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
@@ -112,3 +119,4 @@ function calculateWinner(squares) {
   }
   return null;
 }
+
