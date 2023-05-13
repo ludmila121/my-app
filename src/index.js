@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { App } from 'components/App';
+import  App  from 'components/App';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 
-function Square(props) {
+/* function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
       {props.value}
@@ -94,8 +94,8 @@ class Board extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{/* TODO */}</ol>
-        </div>
+          <ol>{/* TODO *///}//</ol>
+/*         </div>
       </div>
     );
   }
@@ -129,4 +129,4 @@ function calculateWinner(squares) {
 
 
  
-  
+   */ 
